@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSmart AI - Intelligent Shopping Assistant</title>
+
+    <meta
+        name="description"
+        content="ShopSmart AI - Your intelligent shopping assistant for smart product recommendations."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER / NAVBAR
+    ========================== -->
+    <header class="header">
+        <div class="container navbar">
+
+            <a href="#" class="logo" onclick="showSection('home')">
+                <span class="logo-icon">🛍️</span>
+                <span>ShopSmart <strong>AI</strong></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('products')">Products</a>
+                <a href="#" onclick="showSection('deals')">Deals</a>
+                <a href="#" onclick="showSection('orders')">Orders</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <button
+                    class="icon-btn"
+                    id="themeToggle"
+                    title="Toggle theme"
+                    onclick="toggleTheme()"
+                >
+                    🌙
+                </button>
+
+                <button
+                    class="icon-btn"
+                    title="Wishlist"
+                    onclick="showWishlist()"
+                >
+                    ❤️
+                    <span class="badge" id="wishlistCount">0</span>
+                </button>
+
+                <button
+                    class="icon-btn cart-btn"
+                    title="Shopping Cart"
+                    onclick="openCart()"
+                >
+                    🛒
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main>
+
+
+        <!-- =========================
+             HOME SECTION
+        ========================== -->
+        <section id="home" class="page-section active-section">
+
+            <div class="hero container">
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+                        ✨ AI-Powered Shopping
+                    </span>
+
+                    <h1>
+                        Shop smarter with
+                        <span>ShopSmart AI</span>
+                    </h1>
+
+                    <p>
+                        Your intelligent shopping assistant that helps you
+                        discover the right products, compare options,
+                        find the best deals and shop within your budget.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            class="primary-btn"
+                            onclick="showSection('products')"
+                        >
+                            🛍️ Explore Products
+                        </button>
+
+                        <button
+                            class="secondary-btn"
+                            onclick="openChatbot()"
+                        >
+                            🤖 Ask AI
+                        </button>
+
+                    </div>
+
+                    <div class="hero-stats">
+
+                        <div class="stat">
+                            <strong>30+</strong>
+                            <span>Products</span>
+                        </div>
+
+                        <div class="stat">
+                            <strong>4.5★</strong>
+                            <span>Avg Rating</span>
+                        </div>
+
+                        <div class="stat">
+                            <strong>AI</strong>
+                            <span>Smart Assistant</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-card">
+
+                    <div class="ai-card-header">
+                        <div class="ai-avatar">🤖</div>
+
+                        <div>
+                            <strong>ShopSmart AI</strong>
+                            <small>Online • Ready to help</small>
+                        </div>
+
+                        <span class="online-dot"></span>
+                    </div>
+
+                    <div class="ai-message">
+                        👋 Hi! I'm your shopping assistant.
+                        <br><br>
+                        Tell me what you're looking for and I'll help
+                        you find the perfect product.
+                    </div>
+
+                    <div class="quick-prompts">
+
+                        <button onclick="quickChat('Suggest a smartphone under ₹20,000')">
+                            📱 Smartphone under ₹20K
+                        </button>
+
+                        <button onclick="quickChat('I need headphones for gaming')">
+                            🎧 Gaming Headphones
+                        </button>
+
+                        <button onclick="quickChat('Suggest something under ₹5,000')">
+                            💰 Under ₹5,000
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 CATEGORIES
+            ========================== -->
+            <section class="container categories-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">EXPLORE</span>
+                        <h2>Shop by Category</h2>
+                    </div>
+                </div>
+
+                <div class="category-grid">
+
+                    <button
+                        class="category-card"
+                        onclick="filterCategory('Electronics')"
+                    >
+                        <span class="category-icon">📱</span>
+                        <strong>Electronics</strong>
+                        <small>Phones, laptops & more</small>
+                    </button>
+
+                    <button
+                        class="category-card"
+                        onclick="filterCategory('Fashion')"
+                    >
+                        <span class="category-icon">👟</span>
+                        <strong>Fashion</strong>
+                        <small>Shoes, clothes & bags</small>
+                    </button>
+
+                    <button
+                        class="category-card"
+                        onclick="filterCategory('Home')"
+                    >
+                        <span class="category-icon">🏠</span>
+                        <strong>Home</strong>
+                        <small>Kitchen & accessories</small>
+                    </button>
+
+                    <button
+                        class="category-card"
+                        onclick="filterCategory('Beauty')"
+                    >
+                        <span class="category-icon">✨</span>
+                        <strong>Beauty</strong>
+                        <small>Skincare & personal care</small>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 FEATURED PRODUCTS
+            ========================== -->
+            <section class="container">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">TRENDING NOW</span>
+                        <h2>Featured Products</h2>
+                    </div>
+
+                    <button
+                        class="text-btn"
+                        onclick="showSection('products')"
+                    >
+                        View All →
+                    </button>
+
+                </div>
+
+                <div
+                    class="product-grid"
+                    id="featuredProducts"
+                ></div>
+
+            </section>
+
+
+            <!-- =========================
+                 AI FEATURES
+            ========================== -->
+            <section class="container ai-features-section">
+
+                <div class="section-heading center-heading">
+                    <span class="section-label">SMART SHOPPING</span>
+                    <h2>Why ShopSmart AI?</h2>
+                    <p>
+                        Shopping made easier with intelligent assistance.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI Recommendations</h3>
+                        <p>
+                            Tell us your needs and get personalized
+                            product recommendations.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Budget Friendly</h3>
+                        <p>
+                            Find the best products within your preferred
+                            budget.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚖️</div>
+                        <h3>Compare Products</h3>
+                        <p>
+                            Compare prices, ratings, features and
+                            specifications easily.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔥</div>
+                        <h3>Best Deals</h3>
+                        <p>
+                            Discover exciting discounts and trending
+                            products.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUCTS SECTION
+        ========================== -->
+        <section
+            id="products"
+            class="page-section"
+        >
+
+            <div class="container page-header">
+
+                <div>
+                    <span class="section-label">DISCOVER</span>
+                    <h1>All Products</h1>
+                    <p>Find the perfect product for you.</p>
+                </div>
+
+            </div>
+
+
+            <div class="container">
+
+                <div class="search-filter-bar">
+
+                    <div class="search-box">
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="productSearch"
+                            placeholder="Search products, brands or features..."
+                            oninput="searchProducts()"
+                        >
+
+                    </div>
+
+                    <select
+                        id="categoryFilter"
+                        onchange="applyFilters()"
+                    >
+                        <option value="all">All Categories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Home">Home</option>
+                        <option value="Beauty">Beauty</option>
+                    </select>
+
+                    <select
+                        id="priceFilter"
+                        onchange="applyFilters()"
+                    >
+                        <option value="all">Any Price</option>
+                        <option value="5000">Under ₹5,000</option>
+                        <option value="10000">Under ₹10,000</option>
+                        <option value="20000">Under ₹20,000</option>
+                        <option value="50000">Under ₹50,000</option>
+                    </select>
+
+                    <select
+                        id="ratingFilter"
+                        onchange="applyFilters()"
+                    >
+                        <option value="all">Any Rating</option>
+                        <option value="4.5">4.5★ & above</option>
+                        <option value="4">4★ & above</option>
+                        <option value="3.5">3.5★ & above</option>
+                    </select>
+
+                </div>
+
+
+                <div class="results-info">
+                    <span id="resultsCount">Showing products</span>
+
+                    <select
+                        id="sortProducts"
+                        onchange="sortProducts()"
+                    >
+                        <option value="default">Sort: Recommended</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="discount">Best Discount</option>
+                    </select>
+                </div>
+
+
+                <div
+                    class="product-grid"
+                    id="productsGrid"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DEALS SECTION
+        ========================== -->
+        <section
+            id="deals"
+            class="page-section"
+        >
+
+            <div class="container page-header">
+
+                <span class="section-label">SAVE MORE</span>
+
+                <h1>🔥 Best Deals</h1>
+
+                <p>
+                    Amazing products at special prices.
+                </p>
+
+            </div>
+
+            <div
+                class="container product-grid"
+                id="dealsGrid"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             ORDERS SECTION
+        ========================== -->
+        <section
+            id="orders"
+            class="page-section"
+        >
+
+            <div class="container page-header">
+
+                <span class="section-label">YOUR SHOPPING</span>
+
+                <h1>📦 Order Tracking</h1>
+
+                <p>
+                    Track your demo orders and delivery status.
+                </p>
+
+            </div>
+
+
+            <div class="container orders-container">
+
+                <div class="order-card">
+
+                    <div class="order-top">
+
+                        <div>
+                            <span class="order-label">ORDER ID</span>
+                            <h3>#SSAI20260905</h3>
+                        </div>
+
+                        <span class="status-badge">
+                            In Transit
+                        </span>
+
+                    </div>
+
+
+                    <div class="order-product">
+
+                        <div class="order-product-image">
+                            📱
+                        </div>
+
+                        <div>
+                            <strong>Smartphone Pro X</strong>
+                            <p>Expected delivery: 8 September 2026</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="tracking">
+
+                        <div class="tracking-step completed">
+                            <div>✓</div>
+                            <span>Ordered</span>
+                        </div>
+
+                        <div class="tracking-line completed"></div>
+
+                        <div class="tracking-step completed">
+                            <div>✓</div>
+                            <span>Packed</span>
+                        </div>
+
+                        <div class="tracking-line completed"></div>
+
+                        <div class="tracking-step active">
+                            <div>🚚</div>
+                            <span>Shipped</span>
+                        </div>
+
+                        <div class="tracking-line"></div>
+
+                        <div class="tracking-step">
+                            <div>🏠</div>
+                            <span>Delivered</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="support-card">
+
+                    <div class="support-icon">💬</div>
+
+                    <div>
+                        <h3>Need help with your order?</h3>
+                        <p>
+                            Ask ShopSmart AI about delivery, returns,
+                            refunds or cancellations.
+                        </p>
+                    </div>
+
+                    <button
+                        class="primary-btn"
+                        onclick="openChatbot()"
+                    >
+                        Ask AI
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PRODUCT MODAL
+    ========================== -->
+    <div
+        class="modal-overlay"
+        id="productModal"
+        onclick="closeModalOutside(event)"
+    >
+
+        <div class="modal">
+
+            <button
+                class="modal-close"
+                onclick="closeProductModal()"
+            >
+                ✕
+            </button>
+
+            <div id="productModalContent"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CART DRAWER
+    ========================== -->
+    <div
+        class="drawer-overlay"
+        id="cartOverlay"
+        onclick="closeCartOutside(event)"
+    >
+
+        <aside
+            class="cart-drawer"
+            id="cartDrawer"
+        >
+
+            <div class="drawer-header">
+
+                <div>
+                    <span class="section-label">SHOPPING</span>
+                    <h2>🛒 Your Cart</h2>
+                </div>
+
+                <button
+                    class="modal-close"
+                    onclick="closeCart()"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+
+            <div
+                class="cart-items"
+                id="cartItems"
+            ></div>
+
+
+            <div
+                class="cart-empty"
+                id="emptyCart"
+            >
+                <div>🛒</div>
+                <h3>Your cart is empty</h3>
+                <p>Add some products to get started.</p>
+
+                <button
+                    class="primary-btn"
+                    onclick="closeCart(); showSection('products')"
+                >
+                    Start Shopping
+                </button>
+            </div>
+
+
+            <div
+                class="cart-summary"
+                id="cartSummary"
+            >
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong id="cartSubtotal">₹0</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <strong
+                        class="discount-text"
+                        id="cartDiscount"
+                    >
+                        -₹0
+                    </strong>
+                </div>
+
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <strong id="cartTotal">₹0</strong>
+                </div>
+
+                <button
+                    class="checkout-btn"
+                    onclick="checkout()"
+                >
+                    Proceed to Checkout →
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- =========================
+         WISHLIST MODAL
+    ========================== -->
+    <div
+        class="modal-overlay"
+        id="wishlistModal"
+    >
+
+        <div class="modal wishlist-modal">
+
+            <button
+                class="modal-close"
+                onclick="closeWishlist()"
+            >
+                ✕
+            </button>
+
+            <span class="section-label">SAVED PRODUCTS</span>
+
+            <h2>❤️ My Wishlist</h2>
+
+            <div
+                class="product-grid"
+                id="wishlistGrid"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         COMPARISON BAR
+    ========================== -->
+    <div
+        class="compare-bar"
+        id="compareBar"
+    >
+
+        <div>
+            <strong>⚖️ Compare Products</strong>
+            <span id="compareCount">0 selected</span>
+        </div>
+
+        <button
+            class="primary-btn"
+            onclick="openComparison()"
+        >
+            Compare
+        </button>
+
+        <button
+            class="text-btn"
+            onclick="clearComparison()"
+        >
+            Clear
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         COMPARISON MODAL
+    ========================== -->
+    <div
+        class="modal-overlay"
+        id="comparisonModal"
+    >
+
+        <div class="modal comparison-modal">
+
+            <button
+                class="modal-close"
+                onclick="closeComparison()"
+            >
+                ✕
+            </button>
+
+            <span class="section-label">SMART COMPARISON</span>
+
+            <h2>⚖️ Compare Products</h2>
+
+            <div
+                id="comparisonContent"
+                class="comparison-content"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CHATBOT
+    ========================== -->
+
+    <!-- Floating AI Button -->
+    <button
+        class="chatbot-float"
+        id="chatbotFloat"
+        onclick="toggleChatbot()"
+        title="Ask ShopSmart AI"
+    >
+        🤖
+        <span class="chat-notification">1</span>
+    </button>
+
+
+    <!-- Chat Window -->
+    <div
+        class="chatbot-window"
+        id="chatbotWindow"
+    >
+
+        <div class="chat-header">
+
+            <div class="chat-profile">
+
+                <div class="chat-avatar">
+                    🤖
+                    <span class="online-dot"></span>
+                </div>
+
+                <div>
+                    <strong>ShopSmart AI</strong>
+                    <small>Smart Shopping Assistant</small>
+                </div>
+
+            </div>
+
+            <div class="chat-header-actions">
+
+                <button
+                    onclick="clearChat()"
+                    title="Clear chat"
+                >
+                    🗑️
+                </button>
+
+                <button
+                    onclick="toggleChatbot()"
+                    title="Close"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="chat-messages"
+            id="chatMessages"
+        >
+
+            <div class="chat-message bot-message">
+
+                <div class="message-avatar">🤖</div>
+
+                <div class="message-content">
+
+                    <div class="message-bubble">
+                        👋 Hi! I'm ShopSmart AI.
+                        <br><br>
+                        I can help you find products, compare items,
+                        find deals, stay within your budget and more!
+                        <br><br>
+                        What are you looking for today?
+                    </div>
+
+                    <small class="message-time">
+                        Just now
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Suggested Questions -->
+        <div
+            class="chat-suggestions"
+            id="chatSuggestions"
+        >
+
+            <button onclick="quickChat('Suggest a smartphone under ₹20,000')">
+                📱 Phone under ₹20K
+            </button>
+
+            <button onclick="quickChat('I need headphones for gaming')">
+                🎧 Gaming headphones
+            </button>
+
+            <button onclick="quickChat('Show me the best deals')">
+                🔥 Best deals
+            </button>
+
+            <button onclick="quickChat('Suggest something under ₹5,000')">
+                💰 Under ₹5K
+            </button>
+
+        </div>
+
+
+        <!-- Chat Input -->
+        <form
+            class="chat-input-area"
+            id="chatForm"
+        >
+
+            <button
+                type="button"
+                class="voice-btn"
+                id="voiceBtn"
+                onclick="startVoiceSearch()"
+                title="Voice Search"
+            >
+                🎤
+            </button>
+
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask me anything about shopping..."
+                autocomplete="off"
+            >
+
+            <button
+                type="submit"
+                class="send-btn"
+                title="Send"
+            >
+                ➤
+            </button>
+
+        </form>
+
+        <div class="chat-footer">
+            <span>✨ AI-powered shopping assistant</span>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOAST NOTIFICATION
+    ========================== -->
+    <div
+        class="toast"
+        id="toast"
+    >
+        <span id="toastIcon">✓</span>
+        <span id="toastMessage">Done!</span>
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    <span class="logo-icon">🛍️</span>
+                    <span>ShopSmart <strong>AI</strong></span>
+                </div>
+
+                <p>
+                    Smart shopping powered by intelligent assistance.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Shop</h4>
+                    <a href="#" onclick="showSection('products')">
+                        Products
+                    </a>
+                    <a href="#" onclick="showSection('deals')">
+                        Deals
+                    </a>
+                </div>
+
+                <div>
+                    <h4>Help</h4>
+                    <a href="#" onclick="openChatbot()">
+                        Ask AI
+                    </a>
+                    <a href="#" onclick="showSection('orders')">
+                        Track Order
+                    </a>
+                </div>
+
+                <div>
+                    <h4>Categories</h4>
+                    <a href="#" onclick="filterCategory('Electronics')">
+                        Electronics
+                    </a>
+                    <a href="#" onclick="filterCategory('Fashion')">
+                        Fashion
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+            <p>
+                © 2026 ShopSmart AI • Demo E-Commerce Project
+            </p>
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT FILES
+    ========================== -->
+
+    <script src="products.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
