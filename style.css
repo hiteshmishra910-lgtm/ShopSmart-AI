@@ -2223,3 +2223,136 @@ body.dark .footer {
         max-width: 95%;
     }
 }
+/* =====================================================
+   SHOPSMART AI - PRODUCT FOLLOWING ORB
+===================================================== */
+
+.product-follow-orb {
+    position: fixed;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9990;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255,255,255,0.95) 0%,
+            rgba(190,255,215,0.85) 12%,
+            rgba(90,190,125,0.55) 35%,
+            rgba(40,130,80,0.20) 65%,
+            transparent 75%
+        );
+
+    filter: blur(1px);
+
+    box-shadow:
+        0 0 25px rgba(70,170,110,0.35),
+        0 0 60px rgba(70,170,110,0.20);
+
+    transform: translate3d(-50%, -50%, 0);
+    transition:
+        left 0.65s cubic-bezier(.22,1,.36,1),
+        top 0.65s cubic-bezier(.22,1,.36,1),
+        width 0.35s ease,
+        height 0.35s ease,
+        opacity 0.35s ease;
+
+    opacity: 0.55;
+}
+
+/* Inner glow */
+.product-follow-orb::before {
+    content: "";
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.25);
+
+    filter: blur(8px);
+}
+
+/* Outer glow */
+.product-follow-orb::after {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+
+    border: 1px solid rgba(90,180,120,0.18);
+
+    animation: orbPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes orbPulse {
+    0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.25;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: 0.7;
+    }
+}
+
+
+/* =====================================================
+   PRODUCT HOVER
+===================================================== */
+
+.product-card {
+    position: relative;
+    transition:
+        transform 0.45s cubic-bezier(.22,1,.36,1),
+        box-shadow 0.45s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px) scale(1.015);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.10);
+}
+
+
+/* Product image gets slight movement */
+
+.product-card img {
+    transition:
+        transform 0.55s cubic-bezier(.22,1,.36,1);
+}
+
+.product-card:hover img {
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+   ORB ACTIVE STATE
+===================================================== */
+
+.product-follow-orb.active {
+    width: 125px;
+    height: 125px;
+    opacity: 0.85;
+
+    box-shadow:
+        0 0 35px rgba(70,170,110,0.45),
+        0 0 90px rgba(70,170,110,0.25);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .product-follow-orb {
+        display: none;
+    }
+
+}

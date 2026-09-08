@@ -1691,3 +1691,126 @@ document.addEventListener(
     },
     true
 );
+/* =====================================================
+   SHOPSMART AI - PRODUCT FOLLOWING ORB
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Create orb
+    const orb = document.createElement("div");
+
+    orb.className = "product-follow-orb";
+
+    document.body.appendChild(orb);
+
+
+    // Default orb position
+    let defaultX = window.innerWidth * 0.78;
+    let defaultY = window.innerHeight * 0.35;
+
+
+    orb.style.left = defaultX + "px";
+    orb.style.top = defaultY + "px";
+
+
+    // All product areas
+    const productContainers = [
+        document.getElementById("featuredProducts"),
+        document.getElementById("productsGrid"),
+        document.getElementById("dealsGrid"),
+        document.getElementById("wishlistGrid")
+    ];
+
+
+    productContainers.forEach(container => {
+
+        if (!container) return;
+
+
+        // Event delegation
+        container.addEventListener("mouseover", (event) => {
+
+            const card = event.target.closest(".product-card");
+
+            if (!card || !container.contains(card)) return;
+
+
+            const rect = card.getBoundingClientRect();
+
+
+            // Move orb to product
+            const targetX = rect.left + rect.width * 0.82;
+            const targetY = rect.top + rect.height * 0.25;
+
+
+            orb.style.left = targetX + "px";
+            orb.style.top = targetY + "px";
+
+
+            orb.classList.add("active");
+
+
+            card.classList.add("orb-hover");
+
+        });
+
+
+        container.addEventListener("mouseout", (event) => {
+
+            const card = event.target.closest(".product-card");
+
+            if (!card) return;
+
+
+            // Don't leave card when moving
+            // between elements inside same card
+            if (card.contains(event.relatedTarget)) return;
+
+
+            card.classList.remove("orb-hover");
+
+            orb.classList.remove("active");
+
+
+            // Return orb to floating position
+            orb.style.left = defaultX + "px";
+            orb.style.top = defaultY + "px";
+
+        });
+
+    });
+
+
+    // Recalculate default position after resize
+    window.addEventListener("resize", () => {
+
+        defaultX = window.innerWidth * 0.78;
+        defaultY = window.innerHeight * 0.35;
+
+    });
+
+
+    // Keep orb visually correct while scrolling
+    window.addEventListener("scroll", () => {
+
+        const activeCard = document.querySelector(
+            ".product-card:hover"
+        );
+
+        if (!activeCard) return;
+
+
+        const rect = activeCard.getBoundingClientRect();
+
+
+        orb.style.left =
+            (rect.left + rect.width * 0.82) + "px";
+
+
+        orb.style.top =
+            (rect.top + rect.height * 0.25) + "px";
+
+    }, { passive: true });
+
+});

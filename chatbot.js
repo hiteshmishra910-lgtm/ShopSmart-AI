@@ -318,11 +318,25 @@ function generateAIResponse(message) {
     /* ORDER TRACKING */
 
     if (
-        text.includes("where is my order") ||
-        text.includes("track my order") ||
-        text.includes("order status") ||
-        text.includes("tracking")
-    ) {
+    text.includes("where is my order") ||
+    text.includes("track my order") ||
+    text.includes("order status") ||
+    text.includes("tracking") ||
+    text.includes("order packed") ||
+    text.includes("packed") ||
+    text.includes("order kab") ||
+    text.includes("kab tak") ||
+    text.includes("when will my order") ||
+    text.includes("when will it arrive") ||
+    text.includes("delivery kab") ||
+    text.includes("delivery") ||
+    text.includes("order kaha") ||
+    text.includes("order kahan") ||
+    text.includes("order aa") ||
+    text.includes("order aayega") ||
+    text.includes("order shipped") ||
+    text.includes("shipped")
+) {
         return `
             <div class="ai-info-card">
                 <h3>📦 Order Tracking</h3>
@@ -450,6 +464,29 @@ function generateAIResponse(message) {
             text
         );
     }
+    /* ACCESSORIES */
+
+if (
+    text.includes("accessor") ||
+    text.includes("charger") ||
+    text.includes("power bank") ||
+    text.includes("powerbank") ||
+    text.includes("cable") ||
+    text.includes("mouse") ||
+    text.includes("keyboard") ||
+    text.includes("speaker") ||
+    text.includes("adapter") ||
+    text.includes("hub") ||
+    text.includes("case") ||
+    text.includes("cover")
+) {
+    conversationContext.lastIntent = "accessories";
+
+    return accessoryRecommendation(
+        extractBudget(text),
+        text
+    );
+}
 
 
     /* SMARTWATCH */
@@ -646,8 +683,77 @@ function generateAIResponse(message) {
 /* =========================================================
    PRODUCT RECOMMENDATION ENGINE
    ========================================================= */
+function accessoryRecommendation(budget, query = "") {
 
+    const keywords = [
+        "accessory",
+        "charger",
+        "power bank",
+        "powerbank",
+        "cable",
+        "mouse",
+        "keyboard",
+        "speaker",
+        "adapter",
+        "hub",
+        "case",
+        "cover"
+    ];
+
+    let results = products.filter(product => {
+
+        const text = `
+            ${product.name || ""}
+            ${product.description || ""}
+            ${product.brand || ""}
+            ${product.features || ""}
+            ${product.category || ""}
+        `.toLowerCase();
+
+        return keywords.some(keyword =>
+            text.includes(keyword)
+        );
+    });
+
+    if (budget) {
+        results = results.filter(
+            product => Number(product.price) <= budget
+        );
+    }
+
+    results = results
+        .sort((a, b) =>
+            Number(b.rating || 0) - Number(a.rating || 0)
+        )
+        .slice(0, 6);
+
+    conversationContext.lastProducts = results;
+    conversationContext.lastCategory = "accessories";
+
+    if (!results.length) {
+        return `
+            <div class="ai-info-card">
+                <h3>🛍️ Accessories</h3>
+                <p>
+                    I couldn't find accessories matching your request.
+                </p>
+                <p>
+                    Try chargers, cables, power banks,
+                    mouse, keyboards or speakers.
+                </p>
+            </div>
+        `;
+    }
+
+    return `
+        <h3>🛍️ Accessories You May Like</h3>
+        <p>Here are some useful accessories for you:</p>
+
+        ${renderChatProducts(results)}
+    `;
+}
 function productRecommendation(category, budget, query) {
+
     let results = [...products];
 
     const normalizedCategory = category.toLowerCase();
